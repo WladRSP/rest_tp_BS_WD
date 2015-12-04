@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= project.nom
+  
+  each projet
+  
+  form(name='add-bug', action='/projects/' + project.idProjet + '/bug/add', method='post')
+    div.input
+      span.label Titre
+      input(type='text', name='title', required)
+    div.input
+      span.label Description
+      input(type='text', name='description', required)
+    div.input
+      span.label Statut
+      select(name='statut', required)
+        option(value='En cours') En cours
+        option(value='Terminé') Terminé
+    div.input
+      input(type='submit', value='Soumettre')
+    

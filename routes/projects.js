@@ -20,11 +20,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  console.log(req);
-  connection.query('SELECT * FROM Projet WHERE idProjet = ' + req.id, function(err, projects, fields) {
+
+  connection.query('SELECT * FROM Projet WHERE idProjet = ' + req.params.id + ');',
+  function(err, project, fields) {
     if (err) throw err;
-    console.log()
-    res.render('project', { project: project });
+    res.render('project', { project: project[0] });
+  });
+});
+
+router.post('/:id/bug/add', function(req, res, next) {
+  connection.query("INSERT INTO Bug (sommaire, description, statut, projet) VALUES ('" + req.body.title + "', '" + req.body.description + "', '" + req.body.statut + "', '" + req.params.id + "');",
+  function(err, project, fields) {
+    if (err) throw err;
+    res.redirect('/' + req.params.id);
   });
 });
 
