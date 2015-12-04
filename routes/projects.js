@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 router.get('/', function(req, res, next) {
-  connection.query('SELECT * FROM Project', function(err, projects, fields) {
+  connection.query('SELECT * FROM Projet', function(err, projects, fields) {
     if (err) throw err;
     console.log(projects);
     res.render('projects', { projects: projects });
@@ -21,9 +21,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   console.log(req);
-  connection.query('SELECT * FROM Project WHERE idProject = ' + req.id, function(err, project, fields) {
+  connection.query('SELECT * FROM Projet WHERE idProjet = ' + req.id, function(err, projects, fields) {
     if (err) throw err;
-    console.log();
+    console.log()
     res.render('project', { project: project });
   });
 });
